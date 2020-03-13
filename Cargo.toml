@@ -4,7 +4,26 @@ version = "0.1.0"
 authors = ["samgomena <samiam4612@gmail.com>"]
 edition = "2018"
 
+# [lib]
+# name = "serde_xdr"
+# path = "src/serde-xdr/src/lib.rs"
+
+[[bin]]
+name = "rust-vxi11"
+path = "src/main.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde-xdr = "*"
+# xdrproto = { git = "https://github.com/benbrittain/rust-xdr" }
+serde-xdr = { git = "https://github.com/samgomena/serde-xdr"}
+tokio = { version = "*", features = ["full"] }
+tokio-core = "*"
+tokio-proto = "*"
+tokio-service = "*"
+nom = "^2.0"
+rustc-serialize = "0.3"
+serde = { version = "1.0.104", features = ["derive"] }
+serde_bytes = "*"
+serde_derive = "*"
+byteorder = "*"
+futures = "*"
