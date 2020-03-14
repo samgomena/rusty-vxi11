@@ -38,8 +38,8 @@ impl<T> ServerProto<T> for DeviceAsyncProtocol
 where
   T: Io + 'static,
 {
-  type Request = xdr_rpc::XdrRequest<DeviceAsync>;
-  type Response = xdr_rpc::XdrResponse<DeviceAsync>;
+  type Request = xdr_rpc::XdrRequest<DeviceAsyncRequest>;
+  type Response = xdr_rpc::XdrResponse<DeviceAsyncResponse>;
   type Transport = Framed<T, DeviceAsync>;
   type BindTransport = io::Result<Self::Transport>;
   fn bind_transport(&self, io: T) -> Self::BindTransport {
@@ -76,8 +76,8 @@ impl<T> ServerProto<T> for DeviceCore
 where
   T: Io + 'static,
 {
-  type Request = xdr_rpc::XdrRequest<DeviceCore>;
-  type Response = xdr_rpc::XdrResponse<DeviceCore>;
+  type Request = xdr_rpc::XdrRequest<DeviceCoreRequest>;
+  type Response = xdr_rpc::XdrResponse<DeviceCoreResponse>;
   type Transport = Framed<T, DeviceCore>;
   type BindTransport = io::Result<Self::Transport>;
   fn bind_transport(&self, io: T) -> Self::BindTransport {
@@ -114,8 +114,8 @@ impl<T> ServerProto<T> for DeviceIntr
 where
   T: Io + 'static,
 {
-  type Request = xdr_rpc::XdrRequest<DeviceIntr>;
-  type Response = xdr_rpc::XdrResponse<DeviceIntr>;
+  type Request = xdr_rpc::XdrRequest<DeviceIntrRequest>;
+  type Response = xdr_rpc::XdrResponse<DeviceIntrResponse>;
   type Transport = Framed<T, DeviceIntr>;
   type BindTransport = io::Result<Self::Transport>;
   fn bind_transport(&self, io: T) -> Self::BindTransport {

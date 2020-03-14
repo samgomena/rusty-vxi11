@@ -1,12 +1,8 @@
 [package]
 name = "rusty-vxi11"
 version = "0.1.0"
-authors = ["samgomena <samiam4612@gmail.com>"]
+authors = ["samgomena <samgomena@gmail.com>"]
 edition = "2018"
-
-# [lib]
-# name = "serde_xdr"
-# path = "src/serde-xdr/src/lib.rs"
 
 [[bin]]
 name = "rust-vxi11"
