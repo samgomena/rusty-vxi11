@@ -2,7 +2,7 @@
 // Most functions and fields are named identically to the VXI11 standard
 // In an effort for continuity they share the same names here.
 #![allow(non_snake_case)]
-
+#![allow(unreachable_patterns)]
 use std::{fmt, io};
 use tokio_core::io::EasyBuf;
 
@@ -194,9 +194,7 @@ pub fn device_async_decode(
 ) -> io::Result<Option<DeviceAsyncRequest>> {
   match version {
     1u32 => device_async_decode_v1(procedure, buf),
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown version"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown version")),
   }
 }
 pub fn device_async_decode_v1(
@@ -205,9 +203,7 @@ pub fn device_async_decode_v1(
 ) -> io::Result<Option<DeviceAsyncRequest>> {
   let request = match procedure {
     1u32 => device_async_decode_v1_device_abort(buf),
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown procedure"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown procedure")),
   };
   Ok(Some(DeviceAsyncRequest::V1(request.unwrap().unwrap())))
 }
@@ -248,9 +244,7 @@ pub fn encode_device_async(msg: DeviceAsyncResponse, buf: &mut Vec<u8>) -> io::R
       }
       Ok(())
     }
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown version"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown version")),
   }
 }
 
@@ -309,9 +303,7 @@ pub fn device_core_decode(
 ) -> io::Result<Option<DeviceCoreRequest>> {
   match version {
     1u32 => device_core_decode_v1(procedure, buf),
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown version"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown version")),
   }
 }
 pub fn device_core_decode_v1(
@@ -736,9 +728,7 @@ pub fn encode_device_core(msg: DeviceCoreResponse, buf: &mut Vec<u8>) -> io::Res
       }
       Ok(())
     }
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown version"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown version")),
   }
 }
 
@@ -774,9 +764,7 @@ pub fn device_intr_decode(
 ) -> io::Result<Option<DeviceIntrRequest>> {
   match version {
     1u32 => device_intr_decode_v1(procedure, buf),
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown version"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown version")),
   }
 }
 pub fn device_intr_decode_v1(
@@ -785,9 +773,7 @@ pub fn device_intr_decode_v1(
 ) -> io::Result<Option<DeviceIntrRequest>> {
   let request = match procedure {
     30u32 => device_intr_decode_v1_device_intr_srq(buf),
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown procedure"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown procedure")),
   };
   Ok(Some(DeviceIntrRequest::V1(request.unwrap().unwrap())))
 }
@@ -826,8 +812,6 @@ pub fn encode_device_intr(msg: DeviceIntrResponse, _buf: &mut Vec<u8>) -> io::Re
       }
       Ok(())
     }
-    _ => {
-      return Err(io::Error::new(io::ErrorKind::Other, "unknown version"));
-    }
+    _ => Err(io::Error::new(io::ErrorKind::Other, "unknown version")),
   }
 }

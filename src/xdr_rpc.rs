@@ -1,8 +1,7 @@
-#[macro_use]
 use serde_xdr::*;
 use std::fmt;
 
-// TODO: Import manually for now?
+// TODO: Could not get this to import from `serde_xdr`
 macro_rules! xdr_enum {
     ($name:ident { $($variant:ident = $value:expr, )* }) => {
         #[derive(Clone, Copy, Debug, Eq, PartialEq)]

@@ -1,12 +1,11 @@
-// extern crate serde_xdr;
-
 #[macro_use]
 extern crate serde_derive;
+extern crate serde_xdr;
 extern crate tokio_core;
 extern crate tokio_proto;
 extern crate tokio_service;
 
-use tokio_proto::TcpServer;
+// use tokio_proto::TcpServer;
 
 mod codec;
 mod proto;
