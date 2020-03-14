@@ -1,23 +1,24 @@
+#![allow(deprecated)]
+// Most functions and fields are named identically to the VXI11 standard
+// In an effort for continuity they share the same names here.
+#![allow(non_snake_case)]
+
 use crate::proto::*;
-use crate::service::*;
-use crate::xdr_codec::*;
 use crate::xdr_codec::{AppCodec, XdrCodec};
 use crate::xdr_rpc;
-use serde_xdr;
-use std::{io, result};
+use std::io;
 use tokio_core::io::{Codec, EasyBuf, Framed, Io};
-// use tokio_io::{Codec, EasyBuf, Framed, IoFuture};
 use tokio_proto::pipeline::ServerProto;
 
 pub struct DeviceAsyncCodec;
 impl Codec for DeviceAsyncCodec {
   type In = DeviceAsyncRequest;
   type Out = DeviceAsyncResponse;
-  fn decode(&mut self, buf: &mut EasyBuf) -> io::Result<Option<Self::In>> {
+  fn decode(&mut self, _buf: &mut EasyBuf) -> io::Result<Option<Self::In>> {
     unreachable!()
   }
   fn encode(&mut self, msg: Self::Out, buf: &mut Vec<u8>) -> io::Result<()> {
-    encode(msg, buf)
+    encode_device_async(msg, buf)
   }
 }
 impl AppCodec for DeviceAsyncCodec {
@@ -51,11 +52,11 @@ pub struct DeviceCoreCodec;
 impl Codec for DeviceCoreCodec {
   type In = DeviceCoreRequest;
   type Out = DeviceCoreResponse;
-  fn decode(&mut self, buf: &mut EasyBuf) -> io::Result<Option<Self::In>> {
+  fn decode(&mut self, _buf: &mut EasyBuf) -> io::Result<Option<Self::In>> {
     unreachable!()
   }
   fn encode(&mut self, msg: Self::Out, buf: &mut Vec<u8>) -> io::Result<()> {
-    _encode(msg, buf)
+    encode_device_core(msg, buf)
   }
 }
 impl AppCodec for DeviceCoreCodec {
@@ -72,7 +73,7 @@ impl AppCodec for DeviceCoreCodec {
 pub type DeviceCore = XdrCodec<DeviceCoreCodec>;
 
 pub struct DeviceCoreProtocol;
-impl<T> ServerProto<T> for DeviceCore
+impl<T> ServerProto<T> for DeviceCoreProtocol
 where
   T: Io + 'static,
 {
@@ -89,11 +90,11 @@ pub struct DeviceIntrCodec;
 impl Codec for DeviceIntrCodec {
   type In = DeviceIntrRequest;
   type Out = DeviceIntrResponse;
-  fn decode(&mut self, buf: &mut EasyBuf) -> io::Result<Option<Self::In>> {
+  fn decode(&mut self, _buf: &mut EasyBuf) -> io::Result<Option<Self::In>> {
     unreachable!()
   }
   fn encode(&mut self, msg: Self::Out, buf: &mut Vec<u8>) -> io::Result<()> {
-    __encode(msg, buf)
+    encode_device_intr(msg, buf)
   }
 }
 impl AppCodec for DeviceIntrCodec {
@@ -110,7 +111,7 @@ impl AppCodec for DeviceIntrCodec {
 pub type DeviceIntr = XdrCodec<DeviceIntrCodec>;
 
 pub struct DeviceIntrProtocol;
-impl<T> ServerProto<T> for DeviceIntr
+impl<T> ServerProto<T> for DeviceIntrProtocol
 where
   T: Io + 'static,
 {

@@ -11,14 +11,9 @@ path = "src/main.rs"
 
 [dependencies]
 serde-xdr = { git = "https://github.com/samgomena/serde-xdr"}
-tokio = { version = "*", features = ["full"] }
 tokio-core = "0.1.9"
 tokio-proto = "*"
 tokio-service = "*"
-nom = "^2.0"
-rustc-serialize = "0.3"
 serde = { version = "1.0.104", features = ["derive"] }
-serde_bytes = "*"
 serde_derive = "*"
-byteorder = "*"
 futures = "0.1.14"

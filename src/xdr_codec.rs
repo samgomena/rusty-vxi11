@@ -1,7 +1,11 @@
+#![allow(deprecated)]
+// Most functions and fields are named identically to the VXI11 standard
+// In an effort for continuity they share the same names here.
+#![allow(non_snake_case)]
+
 use std::io;
 
 use crate::xdr_rpc;
-use serde_xdr::*;
 use tokio_core::io::{Codec, EasyBuf};
 
 use xdr_rpc::HasXid;
@@ -30,6 +34,7 @@ pub struct XdrCodec<TApp: AppCodec> {
     app_codec: TApp,
 }
 
+#[allow(dead_code)] // This function was given and could possibly be used somewhere
 fn wrap_error<T>(e: serde_xdr::EncoderError, desc: &str) -> io::Result<T> {
     match e {
         serde_xdr::EncoderError::Io(i) => Err(i),
@@ -56,7 +61,6 @@ impl<TApp: AppCodec> XdrCodec<TApp> {
         // XXX: only drain this if we also successfully deserialize a message
         // below
         buf.drain_to(4);
-        //println!("{:?}", buf.as_slice());
         let rpc_msg = serde_xdr::from_bytes::<xdr_rpc::RpcMsg>(buf.as_slice());
 
         let msg = match rpc_msg {
@@ -65,7 +69,7 @@ impl<TApp: AppCodec> XdrCodec<TApp> {
                 self.xid = c.xid;
                 c
             }
-            Err(e) => {
+            Err(_) => {
                 println!("failed to decode message type");
                 return Ok(None);
             }
@@ -132,7 +136,6 @@ impl<TApp: AppCodec> Codec for XdrCodec<TApp> {
                                 })),
                                 None => Ok(None),
                             }
-                            //Err(io::Error::new(io::ErrorKind::Other, "asdf"))
                         }
                         Err(e) => Err(e),
                     };
@@ -176,10 +179,6 @@ impl<TApp: AppCodec> Codec for XdrCodec<TApp> {
         }
 
         buf.extend(&scratch);
-
-        //println!("response {:?}", msg);
-        //println!("response buffer {:?}", buf);
-
         Ok(())
     }
 }

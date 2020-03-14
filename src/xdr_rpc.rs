@@ -1,8 +1,6 @@
 #[macro_use]
 use serde_xdr::*;
-use std::{fmt, io};
-//use xdr_rpc;
-//use tokio_core::io::EasyBuf;
+use std::fmt;
 
 // TODO: Import manually for now?
 macro_rules! xdr_enum {
