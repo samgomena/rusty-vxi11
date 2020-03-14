@@ -11,11 +11,9 @@ use tokio_proto::TcpServer;
 mod codec;
 mod proto;
 mod service;
+mod vxi11;
 mod xdr_codec;
 mod xdr_rpc;
-
-use codec::*;
-use service::*;
 
 fn main() {
     println!("Hello, World")

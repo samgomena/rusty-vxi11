@@ -1,10 +1,10 @@
 use std::io;
 
-#[macro_use]
-// extern crate serde_xdr;
-use tokio_core::io::{Codec, EasyBuf};
 use crate::xdr_rpc;
-// use xdrgen::*;
+use serde_xdr::*;
+use tokio_core::io::{Codec, EasyBuf};
+
+use xdr_rpc::HasXid;
 
 enum XdrCodecState {
     AwaitingCall,

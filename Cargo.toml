@@ -14,10 +14,9 @@ path = "src/main.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# xdrproto = { git = "https://github.com/benbrittain/rust-xdr" }
 serde-xdr = { git = "https://github.com/samgomena/serde-xdr"}
 tokio = { version = "*", features = ["full"] }
-tokio-core = "*"
+tokio-core = "0.1.9"
 tokio-proto = "*"
 tokio-service = "*"
 nom = "^2.0"
@@ -26,4 +25,4 @@ serde = { version = "1.0.104", features = ["derive"] }
 serde_bytes = "*"
 serde_derive = "*"
 byteorder = "*"
-futures = "*"
+futures = "0.1.14"
